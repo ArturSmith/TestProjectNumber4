@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="main_edit_texts_style">
+        <item name="boxBackgroundMode">filled</item>
+        <item name="boxStrokeColor">@android:color/holo_blue_light</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeErrorColor">@android:color/holo_red_light</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="hintTextColor">@android:color/darker_gray</item>
+        <item name="errorTextColor">@android:color/holo_red_light</item>
+    </style>
+</resources>
