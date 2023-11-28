@@ -1,5 +1,7 @@
 package com.example.testprojectnumber4.presentation
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testprojectnumber4.data.AppRepositoryImpl
@@ -12,8 +14,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
-    private val appRepositoryImpl = AppRepositoryImpl()
+class LoginViewModel(
+    private val appRepositoryImpl: AppRepositoryImpl
+) : ViewModel() {
 
     private val _screenState: MutableStateFlow<ScreenState> = MutableStateFlow(ScreenState.Initial)
     val screenState = _screenState.asStateFlow()

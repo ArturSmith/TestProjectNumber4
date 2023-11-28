@@ -1,6 +1,5 @@
 package com.example.testprojectnumber4.presentation
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,16 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
+import com.example.testprojectnumber4.contracts.navigation
 import com.example.testprojectnumber4.data.entity.ScreenState
 import com.example.testprojectnumber4.data.entity.TextFieldType
 import com.example.testprojectnumber4.databinding.FragmentLoginBinding
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(this)[LoginViewModel::class.java]
-    }
+    private val viewModel: LoginViewModel by viewModel()
     private var _binding: FragmentLoginBinding? = null
     private val binding: FragmentLoginBinding
         get() = _binding ?: throw RuntimeException("Unknown binding object")
@@ -97,6 +97,10 @@ class LoginFragment : Fragment() {
                             View.INVISIBLE,
                             View.VISIBLE
                         )
+                        lifecycleScope.launch {
+                            delay(1000)
+                            navigation().navigateToHomeScreen()
+                        }
                     }
 
                     is ScreenState.Error -> {

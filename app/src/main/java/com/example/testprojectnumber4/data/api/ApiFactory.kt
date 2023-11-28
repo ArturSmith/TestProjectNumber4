@@ -26,7 +26,6 @@ object ApiFactory {
         .baseUrl(BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build()
 
     val apiService: ApiService = retrofit.create(ApiService::class.java)
