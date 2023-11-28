@@ -1,136 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.LoginFragment">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:elevation="25dp"
-        android:indeterminate="true"
-        android:indeterminateTint="@android:color/holo_blue_light"
-        android:indeterminateTintMode="src_atop"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/image_success"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/success"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:backgroundTint="@color/white"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:elevation="25dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@android:color/holo_blue_light"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/ll_centered"
+        <TextView
+            android:id="@+id/image_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/success"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_error"
+
+            <LinearLayout
+                android:id="@+id/ll_centered"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:gravity="center"
-                android:textColor="@android:color/holo_red_light"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:visibility="invisible"
-                tools:text="Wrong login or password, try again." />
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_login"
-                style="@style/main_edit_texts_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:hint="@string/login"
-                android:paddingHorizontal="20dp"
-                app:errorEnabled="true"
-                app:expandedHintEnabled="true">
+                <TextView
+                    android:id="@+id/tv_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    tools:text="Wrong login or password, try again." />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_login"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_login"
+                    style="@style/main_edit_texts_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textCursorDrawable="@null" />
+                    android:layout_margin="15dp"
+                    android:hint="@string/login"
+                    android:paddingHorizontal="20dp"
+                    app:errorEnabled="true"
+                    app:expandedHintEnabled="true">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textCursorDrawable="@null" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_password"
-                style="@style/main_edit_texts_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:hint="@string/password"
-                android:paddingHorizontal="20dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="15"
-                app:counterTextColor="@color/white"
-                app:errorEnabled="true"
-                app:passwordToggleEnabled="true">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_password"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_password"
+                    style="@style/main_edit_texts_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="5dp"
-                    android:inputType="numberPassword"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textCursorDrawable="@null" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_margin="15dp"
+                    android:hint="@string/password"
+                    android:paddingHorizontal="20dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="15"
+                    app:counterTextColor="@color/white"
+                    app:errorEnabled="true"
+                    app:passwordToggleEnabled="true">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:inputType="numberPassword"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textCursorDrawable="@null" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_blue_light"
-        android:text="@string/login"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:text="@string/login"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
