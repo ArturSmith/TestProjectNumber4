@@ -1,4 +1,4 @@
-package com.example.testprojectnumber4.data.models
+package com.example.testprojectnumber4.data.pojo
 
 data class LoginRequest(
     val login: String,

@@ -1,14 +1,12 @@
 package com.example.testprojectnumber4.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testprojectnumber4.data.AppRepositoryImpl
 import com.example.testprojectnumber4.data.entity.ScreenState
 import com.example.testprojectnumber4.data.entity.TextFieldType
 import com.example.testprojectnumber4.data.entity.TextFieldsValidator
-import com.example.testprojectnumber4.data.models.LoginRequest
+import com.example.testprojectnumber4.data.pojo.LoginRequest
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

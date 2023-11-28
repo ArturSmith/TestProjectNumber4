@@ -4,10 +4,11 @@ import android.content.Context
 import android.util.Log
 import com.example.testprojectnumber4.data.api.ApiFactory
 import com.example.testprojectnumber4.data.entity.ScreenState
-import com.example.testprojectnumber4.data.models.LoginRequest
-import com.example.testprojectnumber4.data.models.Token
+import com.example.testprojectnumber4.data.pojo.LoginRequest
+import com.example.testprojectnumber4.data.pojo.Payment
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 
 class AppRepositoryImpl(
@@ -18,7 +19,10 @@ class AppRepositoryImpl(
         context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
     }
     private val sharedEditor = sharedPreferences.edit()
-
+    private val _payments = MutableStateFlow<List<Payment>>(emptyList())
+    val payments = _payments.asStateFlow()
+    private val _loadPaymentsError = MutableStateFlow("")
+    val loadPaymentsError = _loadPaymentsError.asStateFlow()
 
     suspend fun login(loginRequest: LoginRequest): ScreenState {
         return withContext(Dispatchers.IO) {
@@ -35,6 +39,7 @@ class AppRepositoryImpl(
             }
         }
     }
+
 
     private suspend fun saveToken(token: String) {
         withContext(Dispatchers.IO) {
@@ -53,6 +58,23 @@ class AppRepositoryImpl(
     suspend fun getToken(): String? = withContext(Dispatchers.IO) {
         val token = sharedPreferences.getString(TOKEN_KEY, null)
         token
+    }
+
+
+    suspend fun loadPayments() {
+        withContext(Dispatchers.IO) {
+            try {
+                val token = getToken() ?: return@withContext
+                val paymentsResponse = apiFactory.apiService.getPayments(token)
+                if (paymentsResponse.response.isNotEmpty()) {
+                    _payments.emit(paymentsResponse.response)
+                } else {
+                    _payments.emit(emptyList())
+                }
+            } catch (e: Exception) {
+                _loadPaymentsError.emit(e.message.toString())
+            }
+        }
     }
 
 

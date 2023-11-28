@@ -18,6 +18,10 @@ class HomeFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("Unknown binding object")
 
     private val viewModel: HomeViewModel by viewModel()
+    private val adapter by lazy {
+        PaymentsAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,21 +32,58 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recycler.adapter = adapter
         clickListeners()
+        observeViewModel()
     }
 
-
-    private fun clickListeners() {
-        binding.apply {
-            logoutButton.setOnClickListener {
-                lifecycleScope.launch {
-                    viewModel.deleteToken()
-                    navigation().navigateToLoginScreen()
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            viewModel.payments.collect {
+                adapter.submitList(it)
+                if (it.isEmpty()) {
+                    setUI(false, "No available payments")
+                } else {
+                    setUI(true, "")
+                }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.loadPaymentsError.collect {
+                if (it.isNotEmpty()) {
+                    setUI(false, it)
+                } else {
+                    setUI(true, "")
                 }
             }
         }
     }
 
+    private fun setUI(isRecyclerVisible: Boolean, text: String) {
+        binding.apply {
+            if (isRecyclerVisible) {
+                loadListInfo.visibility = View.GONE
+                loadListInfo.text = ""
+                recycler.visibility = View.VISIBLE
+            } else {
+                loadListInfo.visibility = View.VISIBLE
+                loadListInfo.text = text
+                recycler.visibility = View.GONE
+            }
+        }
+    }
+
+
+    private fun clickListeners() {
+        binding.apply {
+            toolbar.setNavigationOnClickListener {
+                lifecycleScope.launch {
+                    viewModel.logout()
+                    navigation().navigateToLoginScreen()
+                }
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

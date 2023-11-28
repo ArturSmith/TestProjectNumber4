@@ -3,4 +3,9 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="logout">Logout</string>
+    <string name="success">Success</string>
+    <string name="payment_id">id %s</string>
+    <string name="amount">Amount %s</string>
+    <string name="created">Created %s</string>
+    <string name="no_payments_available">No payments available</string>
 </resources>

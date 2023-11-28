@@ -128,7 +128,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun setUiState(
-        llCenteredVisibility: Int,
+        cardVisibility: Int,
         progressBarVisibility: Int,
         tvErrorVisibility: Int,
         errorMessage: String,
@@ -136,7 +136,7 @@ class LoginFragment : Fragment() {
         imageSuccessVisibility: Int
     ) {
         binding.apply {
-            llCentered.visibility = llCenteredVisibility
+            cardView.visibility = cardVisibility
             progressBar.visibility = progressBarVisibility
             tvError.visibility = tvErrorVisibility
             imageSuccess.visibility = imageSuccessVisibility
