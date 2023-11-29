@@ -20,13 +20,10 @@ class AppRepositoryImpl(
         context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
     }
     private val sharedEditor = sharedPreferences.edit()
-
     private val _authState = MutableStateFlow<AuthState>(AuthState.NotAuthorized)
     val authState = _authState.asStateFlow()
-
     private val _payments = MutableStateFlow<List<Payment>>(emptyList())
     val payments = _payments.asStateFlow()
-
     private val _loadPaymentsError = MutableStateFlow("")
     val loadPaymentsError = _loadPaymentsError.asStateFlow()
 

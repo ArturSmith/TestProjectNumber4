@@ -97,10 +97,6 @@ class LoginFragment : Fragment() {
                             View.INVISIBLE,
                             View.VISIBLE
                         )
-                        lifecycleScope.launch {
-                            delay(1000)
-                            navigation().navigateToHomeScreen()
-                        }
                     }
 
                     is ScreenState.Error -> {

@@ -79,7 +79,6 @@ class HomeFragment : Fragment() {
             toolbar.setNavigationOnClickListener {
                 lifecycleScope.launch {
                     viewModel.logout()
-                    navigation().navigateToLoginScreen()
                 }
             }
         }
