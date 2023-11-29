@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.example.testprojectnumber4.R
 import com.example.testprojectnumber4.contracts.NavigationContract
+import com.example.testprojectnumber4.data.entity.AuthState
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,11 +23,11 @@ class MainActivity : AppCompatActivity(), NavigationContract {
     override fun onStart() {
         super.onStart()
         lifecycleScope.launch {
-            val token = viewModel.getToken()
-            if (token == null) {
-                navigateToLoginScreen()
-            } else {
-                navigateToHomeScreen()
+            viewModel.authState.collect {
+                when (it) {
+                    AuthState.Authorized -> navigateToHomeScreen()
+                    AuthState.NotAuthorized -> navigateToLoginScreen()
+                }
             }
         }
     }

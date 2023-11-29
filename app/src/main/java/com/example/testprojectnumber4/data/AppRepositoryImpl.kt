@@ -3,6 +3,7 @@ package com.example.testprojectnumber4.data
 import android.content.Context
 import android.util.Log
 import com.example.testprojectnumber4.data.api.ApiFactory
+import com.example.testprojectnumber4.data.entity.AuthState
 import com.example.testprojectnumber4.data.entity.ScreenState
 import com.example.testprojectnumber4.data.pojo.LoginRequest
 import com.example.testprojectnumber4.data.pojo.Payment
@@ -19,8 +20,13 @@ class AppRepositoryImpl(
         context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
     }
     private val sharedEditor = sharedPreferences.edit()
+
+    private val _authState = MutableStateFlow<AuthState>(AuthState.NotAuthorized)
+    val authState = _authState.asStateFlow()
+
     private val _payments = MutableStateFlow<List<Payment>>(emptyList())
     val payments = _payments.asStateFlow()
+
     private val _loadPaymentsError = MutableStateFlow("")
     val loadPaymentsError = _loadPaymentsError.asStateFlow()
 
@@ -30,6 +36,7 @@ class AppRepositoryImpl(
                 val response = apiFactory.apiService.login(loginRequest)
                 if (response.token != null) {
                     saveToken(response.token.token)
+                    _authState.emit(AuthState.Authorized)
                     ScreenState.Success
                 } else {
                     ScreenState.Error("Wrong login or password, try again.")
@@ -52,10 +59,11 @@ class AppRepositoryImpl(
         withContext(Dispatchers.IO) {
             sharedEditor.remove(TOKEN_KEY)
             sharedEditor.apply()
+            _authState.emit(AuthState.NotAuthorized)
         }
     }
 
-    suspend fun getToken(): String? = withContext(Dispatchers.IO) {
+    private suspend fun getToken(): String? = withContext(Dispatchers.IO) {
         val token = sharedPreferences.getString(TOKEN_KEY, null)
         token
     }

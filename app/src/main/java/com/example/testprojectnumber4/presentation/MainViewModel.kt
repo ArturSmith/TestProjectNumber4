@@ -7,9 +7,6 @@ class MainViewModel(
     private val appRepositoryImpl: AppRepositoryImpl
 ) : ViewModel() {
 
-
-    suspend fun getToken(): String? {
-        return appRepositoryImpl.getToken()
-    }
+    val authState = appRepositoryImpl.authState
 
 }
